@@ -7,16 +7,17 @@
            1. RESET, TIPOGRAFIA & RTL
         ========================================= */
         :root {
-            --bg-base: #03030A;
-            --bg-surface: rgba(255, 255, 255, 0.03);
+            /* Paleta Voxo Studio - Tech Glam Dark */
+            --bg-base: #000000;
+            --bg-gradient-top: #17002A;
             --text-light: #FAFAFA;
-            --text-muted: #8E8E9F;
-            --accent-blue: #0044FF;
-            --accent-neon: #00A3FF;
-            --accent-purple: #6C13E2;
-            --accent-light-purple: #C092FF;
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glow-shadow: 0 0 20px rgba(0, 68, 255, 0.4);
+            --text-muted: rgba(250, 250, 250, 0.6);
+            --accent-main: #C092FF;
+            --accent-deep: #6C13E2;
+            
+            --bg-surface: rgba(23, 0, 42, 0.45);
+            --glass-border: rgba(192, 146, 255, 0.15);
+            --glow-shadow: 0 0 25px rgba(108, 19, 226, 0.5);
         }
 
         .voxo-peace-landing {
@@ -33,8 +34,8 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 10%, rgba(108, 19, 226, 0.15) 0%, transparent 40%),
-                        radial-gradient(circle at 50% 80%, rgba(0, 68, 255, 0.1) 0%, transparent 40%);
+            background: radial-gradient(circle at 50% 0%, var(--bg-gradient-top) 0%, transparent 60%),
+                        radial-gradient(circle at 50% 80%, rgba(108, 19, 226, 0.15) 0%, transparent 50%);
             z-index: 0; pointer-events: none;
         }
 
@@ -44,51 +45,41 @@
 
         .voxo-peace-landing * { box-sizing: border-box; margin: 0; padding: 0; position: relative; z-index: 1; }
         .voxo-peace-landing h1, .voxo-peace-landing h2, .voxo-peace-landing h3, .voxo-peace-landing h4 { font-weight: 700; color: var(--text-light); }
-        .voxo-peace-landing a { color: var(--accent-neon); text-decoration: none; transition: color 0.3s, text-shadow 0.3s; }
-        .voxo-peace-landing a:hover { color: var(--text-light); text-shadow: 0 0 10px var(--accent-neon); }
+        .voxo-peace-landing a { color: var(--accent-main); text-decoration: none; transition: color 0.3s, text-shadow 0.3s; }
+        .voxo-peace-landing a:hover { color: var(--text-light); text-shadow: 0 0 10px var(--accent-main); }
 
         /* =========================================
            2. HEADER PREMIUM & SELETOR DE IDIOMAS
         ========================================= */
         .premium-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            background: rgba(3, 3, 10, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            position: sticky;
-            top: 0;
-            z-index: 9999;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 9999;
         }
 
         .header-brand {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(90deg, var(--accent-neon), var(--accent-light-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
+            font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px;
+            background: linear-gradient(90deg, var(--accent-main), var(--text-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         .lang-switcher-container { position: relative; }
-        .lang-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); padding: 8px 20px; border-radius: 50px; cursor: pointer; font-weight: 600; color: var(--text-light); display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; backdrop-filter: blur(10px); }
-        .lang-btn:hover { background: rgba(255, 255, 255, 0.1); box-shadow: var(--glow-shadow); }
-        .lang-dropdown { position: absolute; top: 120%; right: 0; background: #0A0A1A; border: 1px solid var(--glass-border); border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); list-style: none; width: 150px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; overflow: hidden; z-index: 10000;}
+        .lang-btn { background: rgba(250, 250, 250, 0.05); border: 1px solid var(--glass-border); padding: 8px 20px; border-radius: 50px; cursor: pointer; font-weight: 600; color: var(--text-light); display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; backdrop-filter: blur(10px); }
+        .lang-btn:hover { background: rgba(192, 146, 255, 0.1); box-shadow: var(--glow-shadow); }
+        .lang-dropdown { position: absolute; top: 120%; right: 0; background: var(--bg-gradient-top); border: 1px solid var(--glass-border); border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); list-style: none; width: 150px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; overflow: hidden; z-index: 10000;}
         .rtl-mode .lang-dropdown { right: auto; left: 0; }
         .lang-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
         .lang-dropdown li { padding: 12px 20px; cursor: pointer; font-size: 0.9rem; color: var(--text-muted); transition: background 0.2s, color 0.2s; }
-        .lang-dropdown li:hover { background: rgba(255,255,255,0.05); color: var(--text-light); }
-        .lang-dropdown li.active { font-weight: bold; color: var(--accent-neon); background: rgba(0, 163, 255, 0.1); }
+        .lang-dropdown li:hover { background: rgba(192, 146, 255, 0.1); color: var(--text-light); }
+        .lang-dropdown li.active { font-weight: bold; color: var(--accent-main); background: rgba(108, 19, 226, 0.2); }
 
         /* =========================================
            3. ANIMAÇÕES
         ========================================= */
         @keyframes pulseGlow {
-            0% { box-shadow: 0 0 20px rgba(0, 163, 255, 0.4); }
-            50% { box-shadow: 0 0 40px rgba(108, 19, 226, 0.6); }
-            100% { box-shadow: 0 0 20px rgba(0, 163, 255, 0.4); }
+            0% { box-shadow: 0 0 20px rgba(108, 19, 226, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(192, 146, 255, 0.6); }
+            100% { box-shadow: 0 0 20px rgba(108, 19, 226, 0.4); }
         }
         .voxo-anim { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .voxo-anim.is-visible { opacity: 1; transform: translateY(0); }
@@ -102,15 +93,15 @@
         .voxo-peace-landing .btn:hover { transform: translateY(-3px); }
         
         .voxo-peace-landing .glow-btn {
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-            color: white;
+            background: linear-gradient(90deg, var(--accent-deep), var(--accent-main));
+            color: var(--text-light);
             animation: pulseGlow 3s infinite;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(250,250,250,0.2);
         }
-        .voxo-peace-landing .dark-btn { background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--glass-border); backdrop-filter: blur(10px); }
-        .voxo-peace-landing .dark-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--accent-neon); box-shadow: 0 0 15px rgba(0,163,255,0.3); }
+        .voxo-peace-landing .dark-btn { background: rgba(250,250,250,0.05); color: var(--text-light); border: 1px solid var(--glass-border); backdrop-filter: blur(10px); }
+        .voxo-peace-landing .dark-btn:hover { background: rgba(192,146,255,0.1); border-color: var(--accent-main); box-shadow: 0 0 15px rgba(192,146,255,0.3); }
 
-        .voxo-peace-landing .heart-icon-small { width: 32px; height: 32px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2300A3FF"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') center/contain no-repeat; margin: 20px auto; filter: drop-shadow(0 0 8px var(--accent-neon)); }
+        .voxo-peace-landing .heart-icon-small { width: 32px; height: 32px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23C092FF"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') center/contain no-repeat; margin: 20px auto; filter: drop-shadow(0 0 8px var(--accent-main)); }
         
         .voxo-peace-landing .text-center { text-align: center; }
         .voxo-peace-landing .section-spacing { padding: 100px 20px; }
@@ -122,60 +113,60 @@
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 50px 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            transition: transform 0.3s, border-color 0.3s;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
-        .dark-glass-card:hover { border-color: rgba(108, 19, 226, 0.5); transform: translateY(-5px); }
+        .dark-glass-card:hover { border-color: var(--accent-main); transform: translateY(-5px); box-shadow: var(--glow-shadow); }
 
         /* Hero */
         .voxo-peace-landing .hero { position: relative; text-align: center; padding: 140px 20px 80px; }
         .voxo-peace-landing .hero-glow-ring {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 400px; height: 400px; border: 1px dashed rgba(0, 163, 255, 0.3); border-radius: 50%;
+            width: 400px; height: 400px; border: 1px dashed rgba(192, 146, 255, 0.3); border-radius: 50%;
             animation: spin 30s linear infinite; z-index: 0; pointer-events: none;
         }
         @keyframes spin { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
         
-        .voxo-peace-landing .hero .heart-hero { width: 100px; height: 100px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FFFFFF"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') center/contain no-repeat; margin: 0 auto 30px; filter: drop-shadow(0 0 25px rgba(0, 163, 255, 0.8)); }
+        .voxo-peace-landing .hero .heart-hero { width: 100px; height: 100px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FAFAFA"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') center/contain no-repeat; margin: 0 auto 30px; filter: drop-shadow(0 0 25px rgba(192, 146, 255, 0.8)); }
 
         /* Grids */
         .voxo-peace-landing .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1100px; margin: 40px auto; }
         .voxo-peace-landing .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 1100px; margin: 40px auto; }
         .voxo-peace-landing .card-row { background: var(--bg-surface); padding: 30px; border-radius: 16px; display: flex; align-items: flex-start; gap: 20px; border: 1px solid var(--glass-border); transition: all 0.3s; }
-        .voxo-peace-landing .card-row:hover { background: rgba(255,255,255,0.05); border-color: var(--accent-neon); }
+        .voxo-peace-landing .card-row:hover { background: rgba(192,146,255,0.05); border-color: var(--accent-main); }
 
         /* Banners */
-        .voxo-peace-landing .neon-banner { background: linear-gradient(135deg, rgba(0, 68, 255, 0.1), rgba(108, 19, 226, 0.1)); border: 1px solid rgba(108, 19, 226, 0.3); color: white; padding: 50px 20px; border-radius: 20px; max-width: 900px; margin: 60px auto; text-align: center; box-shadow: inset 0 0 30px rgba(108, 19, 226, 0.1); }
+        .voxo-peace-landing .neon-banner { background: linear-gradient(135deg, rgba(23, 0, 42, 0.8), rgba(108, 19, 226, 0.2)); border: 1px solid rgba(192, 146, 255, 0.3); color: var(--text-light); padding: 50px 20px; border-radius: 20px; max-width: 900px; margin: 60px auto; text-align: center; box-shadow: inset 0 0 30px rgba(108, 19, 226, 0.2); }
 
         /* Formulario e Mapa */
         .voxo-peace-landing .signature-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; align-items: center; }
         @media (max-width: 992px) { .voxo-peace-landing .signature-grid { grid-template-columns: 1fr; } }
         
-        .voxo-peace-landing .map-box { background: rgba(0,0,0,0.4); border-radius: 20px; padding: 20px; border: 1px solid var(--glass-border); }
-        .voxo-peace-landing .map-stats { display: flex; justify-content: center; gap: 40px; margin-bottom: 20px; font-size: 1.2rem; color: var(--accent-neon); font-weight: bold; }
-        .voxo-peace-landing #peaceMap { width: 100%; height: 400px; border-radius: 12px; z-index: 1; filter: contrast(1.2) brightness(0.9); }
+        .voxo-peace-landing .map-box { background: rgba(0,0,0,0.6); border-radius: 20px; padding: 20px; border: 1px solid var(--glass-border); }
+        .voxo-peace-landing .map-stats { display: flex; justify-content: center; gap: 40px; margin-bottom: 20px; font-size: 1.2rem; color: var(--accent-main); font-weight: bold; }
+        .voxo-peace-landing #peaceMap { width: 100%; height: 400px; border-radius: 12px; z-index: 1; filter: contrast(1.1) brightness(0.8) hue-rotate(260deg); }
         
-        .voxo-peace-landing .form-control { width: 100%; padding: 18px 20px; border: 1px solid var(--glass-border); border-radius: 12px; font-size: 1rem; margin-bottom: 20px; outline: none; background: rgba(0,0,0,0.5); color: var(--text-light); transition: all 0.3s; }
+        .voxo-peace-landing .form-control { width: 100%; padding: 18px 20px; border: 1px solid var(--glass-border); border-radius: 12px; font-size: 1rem; margin-bottom: 20px; outline: none; background: rgba(0,0,0,0.6); color: var(--text-light); transition: all 0.3s; }
         .voxo-peace-landing .form-control::placeholder { color: var(--text-muted); }
-        .voxo-peace-landing .form-control:focus { border-color: var(--accent-light-purple); box-shadow: 0 0 15px rgba(108, 19, 226, 0.3); background: rgba(0,0,0,0.8); }
-        .voxo-peace-landing .form-control option { background: #0A0A1A; color: white; }
+        .voxo-peace-landing .form-control:focus { border-color: var(--accent-main); box-shadow: 0 0 15px rgba(108, 19, 226, 0.4); background: rgba(23,0,42,0.8); }
+        .voxo-peace-landing .form-control option { background: #17002A; color: var(--text-light); }
         
         .voxo-peace-landing .checkbox-group { display: flex; gap: 12px; margin-bottom: 15px; font-size: 0.85rem; color: var(--text-muted); align-items: flex-start; }
-        .voxo-peace-landing .checkbox-group input { margin-top: 4px; accent-color: var(--accent-purple); }
+        .voxo-peace-landing .checkbox-group input { margin-top: 4px; accent-color: var(--accent-deep); }
 
         .voxo-peace-landing .share-input-group { display: flex; gap: 10px; margin-top: 20px; justify-content: center; max-width: 500px; margin: 20px auto 0; }
         .voxo-peace-landing .share-input-group input { flex: 1; padding: 12px 20px; border: 1px solid var(--glass-border); border-radius: 50px; background: rgba(0,0,0,0.5); color: var(--text-muted); pointer-events: none; }
         
         /* Footer Premium */
-        .voxo-peace-landing .footer { background: #010105; color: var(--text-muted); padding: 80px 20px 40px; font-size: 0.9rem; border-top: 1px solid var(--glass-border); }
+        .voxo-peace-landing .footer { background: #000000; color: var(--text-muted); padding: 80px 20px 40px; font-size: 0.9rem; border-top: 1px solid var(--glass-border); }
         .voxo-peace-landing .footer-container { max-width: 1200px; margin: 0 auto; }
         .voxo-peace-landing .footer-links a { color: var(--text-muted); margin-bottom: 10px; display: block; transition: color 0.3s; }
-        .voxo-peace-landing .footer-links a:hover { color: var(--accent-light-purple); }
+        .voxo-peace-landing .footer-links a:hover { color: var(--accent-main); }
         .voxo-peace-landing .footer-credits { border-top: 1px solid var(--glass-border); padding-top: 30px; margin-top: 50px; text-align: center; }
         
         /* Assinatura Voxo Estudio */
-        .voxo-peace-landing .voxo-credit a { color: var(--accent-light-purple); font-weight: 700; letter-spacing: 1px; transition: text-shadow 0.3s; }
-        .voxo-peace-landing .voxo-credit a:hover { color: #FAFAFA; text-shadow: 0 0 10px var(--accent-light-purple); }
+        .voxo-peace-landing .voxo-credit a { color: var(--accent-main); font-weight: 700; letter-spacing: 1px; transition: text-shadow 0.3s; }
+        .voxo-peace-landing .voxo-credit a:hover { color: var(--text-light); text-shadow: 0 0 10px var(--accent-main); }
     </style>
 
     <header class="premium-header">
@@ -198,8 +189,8 @@
     <section class="hero voxo-anim">
         <div class="hero-glow-ring"></div>
         <div class="heart-hero"></div>
-        <h1 data-i18n="hero_title" style="font-size: 3.5rem; margin-bottom: 15px; text-shadow: 0 0 30px rgba(255,255,255,0.2);">Ainda temos uma escolha</h1>
-        <h2 data-i18n="hero_subtitle" style="color: var(--accent-neon); font-size: 2rem; font-weight: 400; letter-spacing: 2px;">A solução é a paz</h2>
+        <h1 data-i18n="hero_title" style="font-size: 3.5rem; margin-bottom: 15px; text-shadow: 0 0 30px rgba(250,250,250,0.2);">Ainda temos uma escolha</h1>
+        <h2 data-i18n="hero_subtitle" style="color: var(--accent-main); font-size: 2rem; font-weight: 400; letter-spacing: 2px;">A solução é a paz</h2>
     </section>
 
     <section class="section-spacing text-center">
@@ -207,7 +198,7 @@
             <p data-i18n="intro_1" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 15px;">Ao longo da história, a humanidade viveu conflitos acreditando que a guerra poderia trazer a paz.</p>
             <p data-i18n="intro_2" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 15px;">Estamos cansados do sofrimento e da destruição causados pela violência.</p>
             <p data-i18n="intro_3" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 15px;">Não queremos mais depender apenas de políticos, religiões, empresas ou instituições.</p>
-            <p data-i18n="intro_4" style="color: var(--text-light); font-size: 1.3rem; font-weight: bold; margin-bottom: 40px; text-shadow: 0 0 20px rgba(255,255,255,0.2);">É hora de unir bilhões de pessoas em torno de um único objetivo: a paz no mundo.</p>
+            <p data-i18n="intro_4" style="color: var(--text-light); font-size: 1.3rem; font-weight: bold; margin-bottom: 40px; text-shadow: 0 0 20px rgba(192, 146, 255, 0.3);">É hora de unir bilhões de pessoas em torno de um único objetivo: a paz no mundo.</p>
             
             <a href="#assinar" class="btn glow-btn">
                 <span data-i18n="btn_sign">Assinar pela paz</span>
@@ -215,16 +206,16 @@
         </div>
 
         <div class="dark-glass-card voxo-anim delay-1" style="max-width: 900px; margin: 80px auto 0;">
-            <p data-i18n="glass_1" style="font-size: 1.2rem; font-weight: 300; color: var(--accent-light-purple);">Junte-se ao maior movimento pela paz da história da humanidade.</p>
+            <p data-i18n="glass_1" style="font-size: 1.2rem; font-weight: 300; color: var(--accent-main);">Junte-se ao maior movimento pela paz da história da humanidade.</p>
             <p data-i18n="glass_2" style="font-size: 1.1rem; margin-top: 15px; color: var(--text-muted);">A paz não será mais um sonho, um discurso, uma promessa ou uma esperança distante.</p>
-            <h2 data-i18n="glass_3" style="margin: 30px 0; font-size: 2.8rem; line-height: 1.2; background: linear-gradient(90deg, #FFF, var(--accent-neon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">A paz é a sobrevivência da humanidade.</h2>
+            <h2 data-i18n="glass_3" style="margin: 30px 0; font-size: 2.8rem; line-height: 1.2; background: linear-gradient(90deg, var(--text-light), var(--accent-main)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">A paz é a sobrevivência da humanidade.</h2>
             <a href="#assinar" class="btn dark-btn" style="margin-top: 20px;">
                 <span data-i18n="btn_sign">Assinar pela paz</span>
             </a>
         </div>
     </section>
 
-    <section class="section-spacing" style="background: rgba(255,255,255,0.01); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
+    <section class="section-spacing" style="background: rgba(23,0,42,0.3); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
         <div class="text-center voxo-anim">
             <h2 data-i18n="princ_title" style="font-size: 2.5rem; margin-bottom: 15px;">Nossos princípios</h2>
             <p data-i18n="princ_sub" style="color: var(--text-muted);">Construído sobre dignidade, solidariedade humana, respeito e transparência.</p>
@@ -250,7 +241,7 @@
         
         <div class="text-center voxo-anim neon-banner">
             <p data-i18n="req_1" style="font-size: 1.1rem; margin-bottom: 10px; color: var(--text-muted);">Existe apenas uma exigência:</p>
-            <h3 data-i18n="req_2" style="font-size: 2.5rem; margin-bottom: 30px; color: white;">o fim da guerra.</h3>
+            <h3 data-i18n="req_2" style="font-size: 2.5rem; margin-bottom: 30px; color: var(--text-light);">o fim da guerra.</h3>
             <a href="#assinar" class="btn glow-btn">
                 <span data-i18n="btn_sign">Assinar pela paz</span>
             </a>
@@ -259,7 +250,7 @@
 
     <section class="section-spacing text-center">
         <div class="voxo-anim">
-            <h3 data-i18n="trans_label" style="color: var(--accent-light-purple); font-size: 1rem; text-transform: uppercase; letter-spacing: 2px;">Transparência</h3>
+            <h3 data-i18n="trans_label" style="color: var(--accent-main); font-size: 1rem; text-transform: uppercase; letter-spacing: 2px;">Transparência</h3>
             <h2 data-i18n="trans_title" style="font-size: 2.5rem; margin: 15px 0 40px;">Como mantemos este movimento limpo</h2>
         </div>
 
@@ -295,16 +286,16 @@
         </div>
         
         <div class="voxo-anim" style="margin-top: 40px;">
-            <a href="#" data-i18n="link_priv" style="font-weight: 600; color: var(--accent-light-purple);">Ler a política de privacidade</a> &nbsp;<span style="color: var(--text-muted)">·</span>&nbsp; <a href="#" data-i18n="link_term" style="font-weight: 600; color: var(--accent-light-purple);">Ler os termos</a>
+            <a href="#" data-i18n="link_priv" style="font-weight: 600; color: var(--accent-main);">Ler a política de privacidade</a> &nbsp;<span style="color: var(--text-muted)">·</span>&nbsp; <a href="#" data-i18n="link_term" style="font-weight: 600; color: var(--accent-main);">Ler os termos</a>
         </div>
     </section>
 
-    <section id="assinar" class="section-spacing" style="background: rgba(108, 19, 226, 0.03); border-top: 1px solid var(--glass-border);">
+    <section id="assinar" class="section-spacing" style="background: rgba(108, 19, 226, 0.05); border-top: 1px solid var(--glass-border);">
         <div class="signature-grid">
             <div class="map-box voxo-anim">
                 <div class="map-stats">
-                    <div><span id="live-counter" style="text-shadow: 0 0 10px var(--accent-neon);">4</span> <br><span data-i18n="map_sig" style="font-size:0.9rem; color:var(--text-muted); font-weight:normal;">assinaturas</span></div>
-                    <div><span id="country-counter" style="text-shadow: 0 0 10px var(--accent-neon);">2</span> <br><span data-i18n="map_cou" style="font-size:0.9rem; color:var(--text-muted); font-weight:normal;">países</span></div>
+                    <div><span id="live-counter" style="text-shadow: 0 0 10px var(--accent-main);">4</span> <br><span data-i18n="map_sig" style="font-size:0.9rem; color:var(--text-muted); font-weight:normal;">assinaturas</span></div>
+                    <div><span id="country-counter" style="text-shadow: 0 0 10px var(--accent-main);">2</span> <br><span data-i18n="map_cou" style="font-size:0.9rem; color:var(--text-muted); font-weight:normal;">países</span></div>
                 </div>
                 <p data-i18n="map_voices" style="text-align: center; color: var(--text-muted); margin-bottom: 15px;">Vozes ao redor do mundo</p>
                 <div id="peaceMap"></div>
@@ -343,7 +334,7 @@
 
     <div class="grid-2" style="max-width: 1200px; padding: 0 20px;">
         <div class="dark-glass-card voxo-anim" style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; text-align: left; padding: 40px;">
-            <div class="heart-icon-small" style="margin:0; width: 60px; height: 60px; filter: drop-shadow(0 0 10px var(--accent-light-purple));"></div>
+            <div class="heart-icon-small" style="margin:0; width: 60px; height: 60px; filter: drop-shadow(0 0 10px var(--accent-main));"></div>
             <div style="flex: 1; min-width: 250px;">
                 <h3 data-i18n="dream_title" style="color: var(--text-light); font-size: 1.5rem; margin-bottom: 5px;">Sonho de paz</h3>
                 <p data-i18n="dream_text" style="font-size: 0.95rem; color: var(--text-muted);">No topo do Monte Everest, uma bandeira branca carregando o coração da paz será erguida como símbolo de uma humanidade que escolheu viver em paz.</p>
@@ -358,7 +349,7 @@
     </div>
 
     <section class="section-spacing text-center voxo-anim">
-        <div class="heart-icon-small" style="margin-bottom: 10px; filter: drop-shadow(0 0 10px var(--accent-light-purple));"></div>
+        <div class="heart-icon-small" style="margin-bottom: 10px; filter: drop-shadow(0 0 10px var(--accent-main));"></div>
         <h3 data-i18n="share_title" style="font-size: 2rem; margin-bottom: 10px;">Envie pra um amigo</h3>
         <p data-i18n="share_sub" style="color: var(--text-muted);">Copie o link e compartilhe — cada voz conta.</p>
         
@@ -390,7 +381,7 @@
 
             <div class="footer-credits">
                 <p data-i18n="foot_insp" style="margin-bottom: 15px; color: var(--text-light);">Inspirado pela bondade humana, coragem, fé e compaixão. A paz é algo que construímos juntos.</p>
-                <p style="font-style: italic; color: rgba(255,255,255,0.3); margin-bottom: 30px; font-size: 0.8rem; max-width: 800px; margin-left: auto; margin-right: auto;">Thanks Alice — Sofia — Frida — Suri — Meggan — Lua — Nadir — Marco — Juliana — Paris — Nádia — Vera — Mary — Julio. Part. Rafael A. — Samuel — *Yeshua — Haroldo — Lee — Jiang — Keanu — Jim — Charlie — Ana — Greta — Eddie — Neil and many others</p>
+                <p style="font-style: italic; color: rgba(250,250,250,0.3); margin-bottom: 30px; font-size: 0.8rem; max-width: 800px; margin-left: auto; margin-right: auto;">Thanks Alice — Sofia — Frida — Suri — Meggan — Lua — Nadir — Marco — Juliana — Paris — Nádia — Vera — Mary — Julio. Part. Rafael A. — Samuel — *Yeshua — Haroldo — Lee — Jiang — Keanu — Jim — Charlie — Ana — Greta — Eddie — Neil and many others</p>
                 
                 <p data-i18n="foot_copy">&copy; 2026 6billionforpeace · Todos os direitos reservados</p>
                 
@@ -480,20 +471,18 @@
             // 3. Mapa Leaflet (TEMA ESCURO)
             var map = L.map('peaceMap', { zoomControl: false, scrollWheelZoom: false }).setView([20, 0], 1.5);
             
-            // TileLayer Dark Mode do CartoDB para combinar com o design
             L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; OpenStreetMap &copy; CartoDB',
-                subdomains: 'abcd',
-                maxZoom: 20
+                attribution: '&copy; OpenStreetMap', subdomains: 'abcd', maxZoom: 20
             }).addTo(map);
 
+            // Pin do mapa calibrado
             var neonHeart = L.divIcon({
                 className: 'custom-div-icon',
-                html: "<div style='background-color:#00A3FF; width:10px; height:10px; border-radius:50%; box-shadow: 0 0 15px #00A3FF, 0 0 30px #6C13E2;'></div>",
+                html: "<div style='background-color:#C092FF; width:10px; height:10px; border-radius:50%; box-shadow: 0 0 15px #C092FF, 0 0 30px #6C13E2;'></div>",
                 iconSize: [10, 10], iconAnchor: [5, 5]
             });
 
-            L.marker([-14.235, -51.925], {icon: neonHeart}).addTo(map); // Brazil Demo
+            L.marker([-14.235, -51.925], {icon: neonHeart}).addTo(map);
 
             // 4. Animação Scroll
             const observer = new IntersectionObserver((entries) => {
@@ -506,15 +495,15 @@
             }, { threshold: 0.15 });
             document.querySelectorAll('.voxo-anim').forEach(el => observer.observe(el));
             
-            // 5. Submit Form Simulado
+            // 5. Submit Form Simulado com Glow Roxo
             document.getElementById('peaceForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 var btn = this.querySelector('.glow-btn');
                 var originalText = btn.innerText;
                 btn.innerText = "Sua voz foi registrada!";
-                btn.style.background = "#00FF66";
-                btn.style.color = "#010105";
-                btn.style.boxShadow = "0 0 30px rgba(0,255,102,0.5)";
+                btn.style.background = "#C092FF";
+                btn.style.color = "#000000";
+                btn.style.boxShadow = "0 0 30px rgba(192,146,255,0.8)";
                 setTimeout(() => {
                     btn.innerText = originalText;
                     btn.style.background = "";
