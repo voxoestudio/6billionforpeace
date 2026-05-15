@@ -1,4 +1,4 @@
-<div class="voxo-peace-landing" id="voxo-app">
+<div class="voxo-peace-landing dark-premium" id="voxo-app">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -6,47 +6,89 @@
         /* =========================================
            1. RESET, TIPOGRAFIA & RTL
         ========================================= */
+        :root {
+            --bg-base: #03030A;
+            --bg-surface: rgba(255, 255, 255, 0.03);
+            --text-light: #FAFAFA;
+            --text-muted: #8E8E9F;
+            --accent-blue: #0044FF;
+            --accent-neon: #00A3FF;
+            --accent-purple: #6C13E2;
+            --accent-light-purple: #C092FF;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glow-shadow: 0 0 20px rgba(0, 68, 255, 0.4);
+        }
+
         .voxo-peace-landing {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: #17002A;
-            background-color: #FAFAFA;
+            color: var(--text-light);
+            background-color: var(--bg-base);
             line-height: 1.6;
             overflow-x: hidden;
             transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .voxo-peace-landing::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 10%, rgba(108, 19, 226, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 50% 80%, rgba(0, 68, 255, 0.1) 0%, transparent 40%);
+            z-index: 0; pointer-events: none;
         }
 
         .voxo-peace-landing.rtl-mode {
-            direction: rtl;
-            text-align: right;
-            font-family: 'Tahoma', 'Arial', sans-serif;
+            direction: rtl; text-align: right; font-family: 'Tahoma', 'Arial', sans-serif;
         }
 
-        .voxo-peace-landing * { box-sizing: border-box; margin: 0; padding: 0; }
-        .voxo-peace-landing h1, .voxo-peace-landing h2, .voxo-peace-landing h3, .voxo-peace-landing h4 { font-weight: 700; color: #001F4D; }
-        .voxo-peace-landing a { color: #00A3FF; text-decoration: none; transition: color 0.3s; }
-        .voxo-peace-landing a:hover { color: #001F4D; }
+        .voxo-peace-landing * { box-sizing: border-box; margin: 0; padding: 0; position: relative; z-index: 1; }
+        .voxo-peace-landing h1, .voxo-peace-landing h2, .voxo-peace-landing h3, .voxo-peace-landing h4 { font-weight: 700; color: var(--text-light); }
+        .voxo-peace-landing a { color: var(--accent-neon); text-decoration: none; transition: color 0.3s, text-shadow 0.3s; }
+        .voxo-peace-landing a:hover { color: var(--text-light); text-shadow: 0 0 10px var(--accent-neon); }
 
         /* =========================================
-           2. SELETOR DE IDIOMAS FLUTUANTE
+           2. HEADER PREMIUM & SELETOR DE IDIOMAS
         ========================================= */
-        .lang-switcher-container { position: fixed; top: 20px; right: 20px; z-index: 9999; }
-        .rtl-mode .lang-switcher-container { right: auto; left: 20px; }
-        .lang-btn { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(0,0,0,0.1); padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: 600; color: #001F4D; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; }
-        .lang-btn:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
-        .lang-dropdown { position: absolute; top: 120%; right: 0; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); list-style: none; width: 150px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; overflow: hidden; }
+        .premium-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(3, 3, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+        }
+
+        .header-brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--accent-neon), var(--accent-light-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .lang-switcher-container { position: relative; }
+        .lang-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); padding: 8px 20px; border-radius: 50px; cursor: pointer; font-weight: 600; color: var(--text-light); display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; backdrop-filter: blur(10px); }
+        .lang-btn:hover { background: rgba(255, 255, 255, 0.1); box-shadow: var(--glow-shadow); }
+        .lang-dropdown { position: absolute; top: 120%; right: 0; background: #0A0A1A; border: 1px solid var(--glass-border); border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); list-style: none; width: 150px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; overflow: hidden; z-index: 10000;}
         .rtl-mode .lang-dropdown { right: auto; left: 0; }
         .lang-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
-        .lang-dropdown li { padding: 12px 20px; cursor: pointer; font-size: 0.9rem; color: #444; transition: background 0.2s; }
-        .lang-dropdown li:hover { background: #F4F7F9; color: #00A3FF; }
-        .lang-dropdown li.active { font-weight: bold; color: #00A3FF; background: #E8F0F8; }
+        .lang-dropdown li { padding: 12px 20px; cursor: pointer; font-size: 0.9rem; color: var(--text-muted); transition: background 0.2s, color 0.2s; }
+        .lang-dropdown li:hover { background: rgba(255,255,255,0.05); color: var(--text-light); }
+        .lang-dropdown li.active { font-weight: bold; color: var(--accent-neon); background: rgba(0, 163, 255, 0.1); }
 
         /* =========================================
            3. ANIMAÇÕES
         ========================================= */
-        @keyframes pulseHeart {
-            0% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); }
-            50% { transform: scale(1.08); filter: drop-shadow(0 0 20px rgba(255,255,255,0.8)); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 20px rgba(0, 163, 255, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(108, 19, 226, 0.6); }
+            100% { box-shadow: 0 0 20px rgba(0, 163, 255, 0.4); }
         }
         .voxo-anim { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .voxo-anim.is-visible { opacity: 1; transform: translateY(0); }
@@ -54,116 +96,162 @@
         .delay-2 { transition-delay: 0.2s; }
 
         /* =========================================
-           4. COMPONENTES VISUAIS
+           4. COMPONENTES VISUAIS & BOTOES
         ========================================= */
-        .voxo-peace-landing .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 40px; border-radius: 50px; font-weight: 600; font-size: 1rem; transition: all 0.3s ease; cursor: pointer; border: none; text-align: center; }
-        .voxo-peace-landing .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
-        .voxo-peace-landing .dark-btn { background: #001533; color: white; }
-        .voxo-peace-landing .green-btn { background: #00FF66; color: #001533; }
-        .voxo-peace-landing .blue-btn { background: #00A3FF; color: white; }
-        .voxo-peace-landing .heart-icon-small { width: 32px; height: 32px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2300A3FF"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') center/contain no-repeat; margin: 20px auto; }
-        .voxo-peace-landing .text-center { text-align: center; }
-        .voxo-peace-landing .section-spacing { padding: 80px 20px; }
+        .voxo-peace-landing .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 40px; border-radius: 50px; font-weight: 600; font-size: 1rem; transition: all 0.3s ease; cursor: pointer; border: none; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+        .voxo-peace-landing .btn:hover { transform: translateY(-3px); }
+        
+        .voxo-peace-landing .glow-btn {
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            animation: pulseGlow 3s infinite;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .voxo-peace-landing .dark-btn { background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--glass-border); backdrop-filter: blur(10px); }
+        .voxo-peace-landing .dark-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--accent-neon); box-shadow: 0 0 15px rgba(0,163,255,0.3); }
 
-        /* Seções */
-        .voxo-peace-landing .hero { background: linear-gradient(180deg, #00A3FF 0%, #001F4D 100%); color: #FFFFFF; text-align: center; padding: 120px 20px 60px; }
-        .voxo-peace-landing .hero .heart-hero { width: 80px; height: 80px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FFFFFF"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') center/contain no-repeat; margin: 0 auto 30px; animation: pulseHeart 2s infinite ease-in-out; }
-        .voxo-peace-landing .blue-glass-card { background: linear-gradient(135deg, #00A3FF, #0055FF); border-radius: 20px; padding: 60px 40px; color: white; max-width: 900px; margin: 40px auto; box-shadow: 0 20px 40px rgba(0, 85, 255, 0.2); }
+        .voxo-peace-landing .heart-icon-small { width: 32px; height: 32px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2300A3FF"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') center/contain no-repeat; margin: 20px auto; filter: drop-shadow(0 0 8px var(--accent-neon)); }
+        
+        .voxo-peace-landing .text-center { text-align: center; }
+        .voxo-peace-landing .section-spacing { padding: 100px 20px; }
+
+        /* Estética Dark Glassmorphism */
+        .dark-glass-card {
+            background: var(--bg-surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .dark-glass-card:hover { border-color: rgba(108, 19, 226, 0.5); transform: translateY(-5px); }
+
+        /* Hero */
+        .voxo-peace-landing .hero { position: relative; text-align: center; padding: 140px 20px 80px; }
+        .voxo-peace-landing .hero-glow-ring {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 400px; height: 400px; border: 1px dashed rgba(0, 163, 255, 0.3); border-radius: 50%;
+            animation: spin 30s linear infinite; z-index: 0; pointer-events: none;
+        }
+        @keyframes spin { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+        
+        .voxo-peace-landing .hero .heart-hero { width: 100px; height: 100px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FFFFFF"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') center/contain no-repeat; margin: 0 auto 30px; filter: drop-shadow(0 0 25px rgba(0, 163, 255, 0.8)); }
+
+        /* Grids */
         .voxo-peace-landing .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1100px; margin: 40px auto; }
         .voxo-peace-landing .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 1100px; margin: 40px auto; }
-        .voxo-peace-landing .card-clean { background: #FFFFFF; padding: 40px 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); text-align: center; }
-        .voxo-peace-landing .card-row { background: #FFFFFF; padding: 25px 30px; border-radius: 12px; display: flex; align-items: flex-start; gap: 15px; border: 1px solid #EAEAEA; }
-        .voxo-peace-landing .cyan-banner { background: #00BFFF; color: white; padding: 50px 20px; border-radius: 16px; max-width: 900px; margin: 60px auto; text-align: center; }
+        .voxo-peace-landing .card-row { background: var(--bg-surface); padding: 30px; border-radius: 16px; display: flex; align-items: flex-start; gap: 20px; border: 1px solid var(--glass-border); transition: all 0.3s; }
+        .voxo-peace-landing .card-row:hover { background: rgba(255,255,255,0.05); border-color: var(--accent-neon); }
+
+        /* Banners */
+        .voxo-peace-landing .neon-banner { background: linear-gradient(135deg, rgba(0, 68, 255, 0.1), rgba(108, 19, 226, 0.1)); border: 1px solid rgba(108, 19, 226, 0.3); color: white; padding: 50px 20px; border-radius: 20px; max-width: 900px; margin: 60px auto; text-align: center; box-shadow: inset 0 0 30px rgba(108, 19, 226, 0.1); }
+
+        /* Formulario e Mapa */
         .voxo-peace-landing .signature-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; align-items: center; }
         @media (max-width: 992px) { .voxo-peace-landing .signature-grid { grid-template-columns: 1fr; } }
-        .voxo-peace-landing .map-box { background: #FFFFFF; border-radius: 20px; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
-        .voxo-peace-landing .map-stats { display: flex; justify-content: center; gap: 40px; margin-bottom: 20px; font-size: 1.2rem; color: #00A3FF; font-weight: bold; }
-        .voxo-peace-landing #peaceMap { width: 100%; height: 350px; border-radius: 12px; z-index: 1; }
-        .voxo-peace-landing .form-card { background: white; padding: 50px 40px; border-radius: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.08); }
-        .voxo-peace-landing .form-control { width: 100%; padding: 15px 20px; border: 1px solid #E0E0E0; border-radius: 10px; font-size: 1rem; margin-bottom: 20px; outline: none; background: #FBFBFB; }
-        .voxo-peace-landing .form-control:focus { border-color: #00A3FF; background: #FFFFFF; }
-        .voxo-peace-landing .checkbox-group { display: flex; gap: 12px; margin-bottom: 15px; font-size: 0.85rem; color: #555; align-items: flex-start; }
-        .voxo-peace-landing .share-input-group { display: flex; gap: 10px; margin-top: 20px; justify-content: center; max-width: 400px; margin: 20px auto 0; }
-        .voxo-peace-landing .share-input-group input { flex: 1; padding: 12px 20px; border: 1px solid #ddd; border-radius: 50px; background: #f4f4f4; color: #555; pointer-events: none; }
-        .voxo-peace-landing .footer { background: #00112A; color: rgba(255,255,255,0.7); padding: 80px 20px 40px; font-size: 0.9rem; }
+        
+        .voxo-peace-landing .map-box { background: rgba(0,0,0,0.4); border-radius: 20px; padding: 20px; border: 1px solid var(--glass-border); }
+        .voxo-peace-landing .map-stats { display: flex; justify-content: center; gap: 40px; margin-bottom: 20px; font-size: 1.2rem; color: var(--accent-neon); font-weight: bold; }
+        .voxo-peace-landing #peaceMap { width: 100%; height: 400px; border-radius: 12px; z-index: 1; filter: contrast(1.2) brightness(0.9); }
+        
+        .voxo-peace-landing .form-control { width: 100%; padding: 18px 20px; border: 1px solid var(--glass-border); border-radius: 12px; font-size: 1rem; margin-bottom: 20px; outline: none; background: rgba(0,0,0,0.5); color: var(--text-light); transition: all 0.3s; }
+        .voxo-peace-landing .form-control::placeholder { color: var(--text-muted); }
+        .voxo-peace-landing .form-control:focus { border-color: var(--accent-light-purple); box-shadow: 0 0 15px rgba(108, 19, 226, 0.3); background: rgba(0,0,0,0.8); }
+        .voxo-peace-landing .form-control option { background: #0A0A1A; color: white; }
+        
+        .voxo-peace-landing .checkbox-group { display: flex; gap: 12px; margin-bottom: 15px; font-size: 0.85rem; color: var(--text-muted); align-items: flex-start; }
+        .voxo-peace-landing .checkbox-group input { margin-top: 4px; accent-color: var(--accent-purple); }
+
+        .voxo-peace-landing .share-input-group { display: flex; gap: 10px; margin-top: 20px; justify-content: center; max-width: 500px; margin: 20px auto 0; }
+        .voxo-peace-landing .share-input-group input { flex: 1; padding: 12px 20px; border: 1px solid var(--glass-border); border-radius: 50px; background: rgba(0,0,0,0.5); color: var(--text-muted); pointer-events: none; }
+        
+        /* Footer Premium */
+        .voxo-peace-landing .footer { background: #010105; color: var(--text-muted); padding: 80px 20px 40px; font-size: 0.9rem; border-top: 1px solid var(--glass-border); }
         .voxo-peace-landing .footer-container { max-width: 1200px; margin: 0 auto; }
-        .voxo-peace-landing .footer-links a { color: white; margin-bottom: 10px; display: block; }
-        .voxo-peace-landing .footer-credits { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; margin-top: 30px; text-align: center; }
+        .voxo-peace-landing .footer-links a { color: var(--text-muted); margin-bottom: 10px; display: block; transition: color 0.3s; }
+        .voxo-peace-landing .footer-links a:hover { color: var(--accent-light-purple); }
+        .voxo-peace-landing .footer-credits { border-top: 1px solid var(--glass-border); padding-top: 30px; margin-top: 50px; text-align: center; }
+        
+        /* Assinatura Voxo Estudio */
+        .voxo-peace-landing .voxo-credit a { color: var(--accent-light-purple); font-weight: 700; letter-spacing: 1px; transition: text-shadow 0.3s; }
+        .voxo-peace-landing .voxo-credit a:hover { color: #FAFAFA; text-shadow: 0 0 10px var(--accent-light-purple); }
     </style>
 
-    <div class="lang-switcher-container">
-        <button class="lang-btn" id="lang-toggle">🌐 <span id="current-lang-text">Português</span></button>
-        <ul class="lang-dropdown" id="lang-list">
-            <li data-lang="pt" class="active">Português</li>
-            <li data-lang="en">English</li>
-            <li data-lang="es">Español</li>
-            <li data-lang="fr">Français</li>
-            <li data-lang="ru">Русский</li>
-            <li data-lang="hi">हिन्दी</li>
-            <li data-lang="zh">中文</li>
-            <li data-lang="ar">العربية</li>
-        </ul>
-    </div>
+    <header class="premium-header">
+        <div class="header-brand">6BillionForPeace</div>
+        <div class="lang-switcher-container">
+            <button class="lang-btn" id="lang-toggle">🌐 <span id="current-lang-text">Português</span></button>
+            <ul class="lang-dropdown" id="lang-list">
+                <li data-lang="pt" class="active">Português</li>
+                <li data-lang="en">English</li>
+                <li data-lang="es">Español</li>
+                <li data-lang="fr">Français</li>
+                <li data-lang="ru">Русский</li>
+                <li data-lang="hi">हिन्दी</li>
+                <li data-lang="zh">中文</li>
+                <li data-lang="ar">العربية</li>
+            </ul>
+        </div>
+    </header>
 
     <section class="hero voxo-anim">
+        <div class="hero-glow-ring"></div>
         <div class="heart-hero"></div>
-        <h1 data-i18n="hero_title" style="font-size: 3rem; margin-bottom: 20px;">Ainda temos uma escolha</h1>
-        <h2 data-i18n="hero_subtitle" style="color: white; font-size: 1.8rem; font-weight: 400;">A solução é a paz</h2>
+        <h1 data-i18n="hero_title" style="font-size: 3.5rem; margin-bottom: 15px; text-shadow: 0 0 30px rgba(255,255,255,0.2);">Ainda temos uma escolha</h1>
+        <h2 data-i18n="hero_subtitle" style="color: var(--accent-neon); font-size: 2rem; font-weight: 400; letter-spacing: 2px;">A solução é a paz</h2>
     </section>
 
     <section class="section-spacing text-center">
         <div class="voxo-anim" style="max-width: 800px; margin: 0 auto;">
-            <p data-i18n="intro_1" style="color: #444; font-size: 1.1rem; margin-bottom: 15px;">Ao longo da história, a humanidade viveu conflitos acreditando que a guerra poderia trazer a paz.</p>
-            <p data-i18n="intro_2" style="color: #444; font-size: 1.1rem; margin-bottom: 15px;">Estamos cansados do sofrimento e da destruição causados pela violência.</p>
-            <p data-i18n="intro_3" style="color: #444; font-size: 1.1rem; margin-bottom: 15px;">Não queremos mais depender apenas de políticos, religiões, empresas ou instituições.</p>
-            <p data-i18n="intro_4" style="color: #001F4D; font-size: 1.2rem; font-weight: bold; margin-bottom: 30px;">É hora de unir bilhões de pessoas em torno de um único objetivo: a paz no mundo.</p>
+            <p data-i18n="intro_1" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 15px;">Ao longo da história, a humanidade viveu conflitos acreditando que a guerra poderia trazer a paz.</p>
+            <p data-i18n="intro_2" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 15px;">Estamos cansados do sofrimento e da destruição causados pela violência.</p>
+            <p data-i18n="intro_3" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 15px;">Não queremos mais depender apenas de políticos, religiões, empresas ou instituições.</p>
+            <p data-i18n="intro_4" style="color: var(--text-light); font-size: 1.3rem; font-weight: bold; margin-bottom: 40px; text-shadow: 0 0 20px rgba(255,255,255,0.2);">É hora de unir bilhões de pessoas em torno de um único objetivo: a paz no mundo.</p>
             
-            <a href="#assinar" class="btn blue-btn">
-                <div class="heart-icon-small" style="width:20px; height:20px; margin:0 10px 0 0; filter: brightness(0) invert(1);"></div>
+            <a href="#assinar" class="btn glow-btn">
                 <span data-i18n="btn_sign">Assinar pela paz</span>
             </a>
         </div>
 
-        <div class="blue-glass-card voxo-anim delay-1">
-            <p data-i18n="glass_1" style="font-size: 1.2rem; font-weight: 300;">Junte-se ao maior movimento pela paz da história da humanidade.</p>
-            <p data-i18n="glass_2" style="font-size: 1.1rem; margin-top: 15px; opacity: 0.9;">A paz não será mais um sonho, um discurso, uma promessa ou uma esperança distante.</p>
-            <h2 data-i18n="glass_3" style="margin: 20px 0; font-size: 2.5rem; line-height: 1.2;">A paz é a sobrevivência da humanidade.</h2>
+        <div class="dark-glass-card voxo-anim delay-1" style="max-width: 900px; margin: 80px auto 0;">
+            <p data-i18n="glass_1" style="font-size: 1.2rem; font-weight: 300; color: var(--accent-light-purple);">Junte-se ao maior movimento pela paz da história da humanidade.</p>
+            <p data-i18n="glass_2" style="font-size: 1.1rem; margin-top: 15px; color: var(--text-muted);">A paz não será mais um sonho, um discurso, uma promessa ou uma esperança distante.</p>
+            <h2 data-i18n="glass_3" style="margin: 30px 0; font-size: 2.8rem; line-height: 1.2; background: linear-gradient(90deg, #FFF, var(--accent-neon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">A paz é a sobrevivência da humanidade.</h2>
             <a href="#assinar" class="btn dark-btn" style="margin-top: 20px;">
-                <div class="heart-icon-small" style="width:20px; height:20px; margin:0 10px 0 0; filter: brightness(0) invert(1);"></div>
                 <span data-i18n="btn_sign">Assinar pela paz</span>
             </a>
         </div>
     </section>
 
-    <section class="section-spacing" style="background: #F4F7F9;">
+    <section class="section-spacing" style="background: rgba(255,255,255,0.01); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
         <div class="text-center voxo-anim">
-            <h2 data-i18n="princ_title" style="font-size: 2.2rem; margin-bottom: 15px;">Nossos princípios</h2>
-            <p data-i18n="princ_sub" style="color: #666;">Construído sobre dignidade, solidariedade humana, respeito e transparência.</p>
+            <h2 data-i18n="princ_title" style="font-size: 2.5rem; margin-bottom: 15px;">Nossos princípios</h2>
+            <p data-i18n="princ_sub" style="color: var(--text-muted);">Construído sobre dignidade, solidariedade humana, respeito e transparência.</p>
         </div>
 
         <div class="grid-3">
-            <div class="card-clean voxo-anim delay-1">
+            <div class="dark-glass-card voxo-anim delay-1" style="padding: 40px 30px; text-align: center;">
                 <div class="heart-icon-small"></div>
                 <h3 data-i18n="card1_title">Sem ideologias</h3>
-                <p data-i18n="card1_text" style="margin-top: 15px; font-size: 0.95rem; color: #666;">Sem interferência nas leis internas ou na soberania de qualquer nação.</p>
+                <p data-i18n="card1_text" style="margin-top: 15px; font-size: 0.95rem; color: var(--text-muted);">Sem interferência nas leis internas ou na soberania de qualquer nação.</p>
             </div>
-            <div class="card-clean voxo-anim delay-2">
+            <div class="dark-glass-card voxo-anim delay-2" style="padding: 40px 30px; text-align: center;">
                 <div class="heart-icon-small"></div>
                 <h3 data-i18n="card2_title">Toda vida importa</h3>
-                <p data-i18n="card2_text" style="margin-top: 15px; font-size: 0.95rem; color: #666;">Independentemente de nacionalidade, sexo, etnia ou religião. Acima de tudo, devemos proteger a vida das crianças.</p>
+                <p data-i18n="card2_text" style="margin-top: 15px; font-size: 0.95rem; color: var(--text-muted);">Independentemente de nacionalidade, sexo, etnia ou religião. Acima de tudo, devemos proteger a vida das crianças.</p>
             </div>
-            <div class="card-clean voxo-anim delay-3">
+            <div class="dark-glass-card voxo-anim delay-3" style="padding: 40px 30px; text-align: center;">
                 <div class="heart-icon-small"></div>
                 <h3 data-i18n="card3_title">Sem guerra</h3>
-                <p data-i18n="card3_text" style="margin-top: 15px; font-size: 0.95rem; color: #666;">A humanidade amadureceu o suficiente para resolver conflitos sem se autodestruir. Conhecemos o horror da guerra. Agora é hora de experimentar a alegria da paz.</p>
+                <p data-i18n="card3_text" style="margin-top: 15px; font-size: 0.95rem; color: var(--text-muted);">A humanidade amadureceu o suficiente para resolver conflitos sem se autodestruir. Conhecemos o horror da guerra. Agora é hora de experimentar a alegria da paz.</p>
             </div>
         </div>
         
-        <div class="text-center voxo-anim" style="margin-top: 50px; background: #001533; color: white; padding: 40px 20px; border-radius: 16px; max-width: 800px; margin: 50px auto 0;">
-            <p data-i18n="req_1" style="font-size: 1.1rem; margin-bottom: 10px;">Existe apenas uma exigência:</p>
-            <h3 data-i18n="req_2" style="color: white; font-size: 2rem; margin-bottom: 25px;">o fim da guerra.</h3>
-            <a href="#assinar" class="btn blue-btn">
-                <div class="heart-icon-small" style="width:20px; height:20px; margin:0 10px 0 0; filter: brightness(0) invert(1);"></div>
+        <div class="text-center voxo-anim neon-banner">
+            <p data-i18n="req_1" style="font-size: 1.1rem; margin-bottom: 10px; color: var(--text-muted);">Existe apenas uma exigência:</p>
+            <h3 data-i18n="req_2" style="font-size: 2.5rem; margin-bottom: 30px; color: white;">o fim da guerra.</h3>
+            <a href="#assinar" class="btn glow-btn">
                 <span data-i18n="btn_sign">Assinar pela paz</span>
             </a>
         </div>
@@ -171,66 +259,60 @@
 
     <section class="section-spacing text-center">
         <div class="voxo-anim">
-            <h3 data-i18n="trans_label" style="color: #00A3FF; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">Transparência</h3>
-            <h2 data-i18n="trans_title" style="font-size: 2.2rem; margin: 10px 0 30px;">Como mantemos este movimento limpo</h2>
+            <h3 data-i18n="trans_label" style="color: var(--accent-light-purple); font-size: 1rem; text-transform: uppercase; letter-spacing: 2px;">Transparência</h3>
+            <h2 data-i18n="trans_title" style="font-size: 2.5rem; margin: 15px 0 40px;">Como mantemos este movimento limpo</h2>
         </div>
 
         <div class="grid-2">
             <div class="card-row voxo-anim delay-1">
                 <div class="heart-icon-small" style="margin: 0; min-width: 24px; height: 24px;"></div>
                 <div style="text-align: left;">
-                    <h4 data-i18n="tcard1_title" style="color: #00A3FF; margin-bottom: 5px;">Sem filiação</h4>
-                    <p data-i18n="tcard1_text" style="font-size: 0.9rem; color: #555;">Sem vínculos políticos, religiosos ou comerciais. Apenas uma mensagem em comum: paz no mundo.</p>
+                    <h4 data-i18n="tcard1_title" style="color: var(--text-light); margin-bottom: 5px;">Sem filiação</h4>
+                    <p data-i18n="tcard1_text" style="font-size: 0.9rem; color: var(--text-muted);">Sem vínculos políticos, religiosos ou comerciais. Apenas uma mensagem em comum: paz no mundo.</p>
                 </div>
             </div>
             <div class="card-row voxo-anim delay-2">
                 <div class="heart-icon-small" style="margin: 0; min-width: 24px; height: 24px;"></div>
                 <div style="text-align: left;">
-                    <h4 data-i18n="tcard2_title" style="color: #00A3FF; margin-bottom: 5px;">Sem rastreadores</h4>
-                    <p data-i18n="tcard2_text" style="font-size: 0.9rem; color: #555;">Sem scripts de publicidade ou analytics. Não fazemos perfil de você. Não vendemos dados.</p>
+                    <h4 data-i18n="tcard2_title" style="color: var(--text-light); margin-bottom: 5px;">Sem rastreadores</h4>
+                    <p data-i18n="tcard2_text" style="font-size: 0.9rem; color: var(--text-muted);">Sem scripts de publicidade ou analytics. Não fazemos perfil de você. Não vendemos dados.</p>
                 </div>
             </div>
             <div class="card-row voxo-anim delay-1">
                 <div class="heart-icon-small" style="margin: 0; min-width: 24px; height: 24px;"></div>
                 <div style="text-align: left;">
-                    <h4 data-i18n="tcard3_title" style="color: #00A3FF; margin-bottom: 5px;">IP nunca armazenado</h4>
-                    <p data-i18n="tcard3_text" style="font-size: 0.9rem; color: #555;">Guardamos apenas um hash SHA-256 unidirecional com salt secreto, para evitar abuso. Não é reversível.</p>
+                    <h4 data-i18n="tcard3_title" style="color: var(--text-light); margin-bottom: 5px;">IP nunca armazenado</h4>
+                    <p data-i18n="tcard3_text" style="font-size: 0.9rem; color: var(--text-muted);">Guardamos apenas um hash SHA-256 unidirecional com salt secreto, para evitar abuso. Não é reversível.</p>
                 </div>
             </div>
             <div class="card-row voxo-anim delay-2">
                 <div class="heart-icon-small" style="margin: 0; min-width: 24px; height: 24px;"></div>
                 <div style="text-align: left;">
-                    <h4 data-i18n="tcard4_title" style="color: #00A3FF; margin-bottom: 5px;">Infraestrutura independente</h4>
-                    <p data-i18n="tcard4_text" style="font-size: 0.9rem; color: #555;">Banco de dados em servidor próprio. Mapa pelo MapLibre. Anti-bot pelo Cloudflare Turnstile. Política completa logo abaixo.</p>
+                    <h4 data-i18n="tcard4_title" style="color: var(--text-light); margin-bottom: 5px;">Infraestrutura independente</h4>
+                    <p data-i18n="tcard4_text" style="font-size: 0.9rem; color: var(--text-muted);">Banco de dados em servidor próprio. Mapa pelo MapLibre. Anti-bot pelo Cloudflare Turnstile. Política completa logo abaixo.</p>
                 </div>
             </div>
         </div>
         
-        <div class="voxo-anim" style="margin-top: 30px;">
-            <a href="#" data-i18n="link_priv" style="font-weight: 600;">Ler a política de privacidade</a> &nbsp;·&nbsp; <a href="#" data-i18n="link_term" style="font-weight: 600;">Ler os termos</a>
+        <div class="voxo-anim" style="margin-top: 40px;">
+            <a href="#" data-i18n="link_priv" style="font-weight: 600; color: var(--accent-light-purple);">Ler a política de privacidade</a> &nbsp;<span style="color: var(--text-muted)">·</span>&nbsp; <a href="#" data-i18n="link_term" style="font-weight: 600; color: var(--accent-light-purple);">Ler os termos</a>
         </div>
     </section>
 
-    <div class="cyan-banner voxo-anim">
-        <h2 data-i18n="vol_title">Voluntários pela paz</h2>
-        <p data-i18n="vol_sub" style="margin-bottom: 30px; font-size: 1.2rem;">Viaje pelo mundo pela paz</p>
-        <button class="btn green-btn" style="cursor: default;" data-i18n="vol_btn">Em breve</button>
-    </div>
-
-    <section id="assinar" class="section-spacing" style="background: #F8FBFC;">
+    <section id="assinar" class="section-spacing" style="background: rgba(108, 19, 226, 0.03); border-top: 1px solid var(--glass-border);">
         <div class="signature-grid">
             <div class="map-box voxo-anim">
                 <div class="map-stats">
-                    <div><span id="live-counter">4</span> <br><span data-i18n="map_sig" style="font-size:0.9rem; color:#666; font-weight:normal;">assinaturas</span></div>
-                    <div><span id="country-counter">2</span> <br><span data-i18n="map_cou" style="font-size:0.9rem; color:#666; font-weight:normal;">países</span></div>
+                    <div><span id="live-counter" style="text-shadow: 0 0 10px var(--accent-neon);">4</span> <br><span data-i18n="map_sig" style="font-size:0.9rem; color:var(--text-muted); font-weight:normal;">assinaturas</span></div>
+                    <div><span id="country-counter" style="text-shadow: 0 0 10px var(--accent-neon);">2</span> <br><span data-i18n="map_cou" style="font-size:0.9rem; color:var(--text-muted); font-weight:normal;">países</span></div>
                 </div>
-                <p data-i18n="map_voices" style="text-align: center; color: #666; margin-bottom: 15px;">Vozes ao redor do mundo</p>
+                <p data-i18n="map_voices" style="text-align: center; color: var(--text-muted); margin-bottom: 15px;">Vozes ao redor do mundo</p>
                 <div id="peaceMap"></div>
             </div>
 
-            <div class="form-card voxo-anim delay-1">
-                <h2 data-i18n="form_title" style="font-size: 2rem; margin-bottom: 10px;">Assine pela paz</h2>
-                <p data-i18n="form_sub" style="color: #666; margin-bottom: 30px;">Acrescente sua voz. Grátis, anônimo ao público, seguro.</p>
+            <div class="dark-glass-card voxo-anim delay-1" style="padding: 50px 40px;">
+                <h2 data-i18n="form_title" style="font-size: 2.5rem; margin-bottom: 10px;">Assine pela paz</h2>
+                <p data-i18n="form_sub" style="color: var(--text-muted); margin-bottom: 30px;">Acrescente sua voz. Grátis, anônimo ao público, seguro.</p>
                 
                 <form id="peaceForm">
                     <input type="text" class="form-control" required placeholder="Nome" data-i18n-ph="form_name">
@@ -253,40 +335,48 @@
 
                     <input type="text" name="website" style="display:none !important;" tabindex="-1" autocomplete="off" placeholder="Website">
 
-                    <button type="submit" class="btn submit-btn dark-btn" style="width: 100%; padding: 18px; margin-top: 10px;" data-i18n="btn_sign">Assinar pela paz</button>
+                    <button type="submit" class="btn glow-btn" style="width: 100%; padding: 18px; margin-top: 20px;" data-i18n="btn_sign">Assinar pela paz</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <div class="cyan-banner voxo-anim" style="background: linear-gradient(135deg, #00C6FF, #00A3FF); padding: 40px 20px; display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; text-align: left;">
-        <div class="heart-icon-small" style="margin:0; background-color: white; border-radius: 4px; padding: 15px; width: 60px; height: 60px; filter: none;"></div>
-        <div style="flex: 1; min-width: 280px;">
-            <h3 data-i18n="dream_title" style="color: white; font-size: 1.5rem; margin-bottom: 5px;">Sonho de paz</h3>
-            <p data-i18n="dream_text" style="font-size: 1rem;">No topo do Monte Everest, uma bandeira branca carregando o coração da paz será erguida como símbolo de uma humanidade que escolheu viver em paz.</p>
+    <div class="grid-2" style="max-width: 1200px; padding: 0 20px;">
+        <div class="dark-glass-card voxo-anim" style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; text-align: left; padding: 40px;">
+            <div class="heart-icon-small" style="margin:0; width: 60px; height: 60px; filter: drop-shadow(0 0 10px var(--accent-light-purple));"></div>
+            <div style="flex: 1; min-width: 250px;">
+                <h3 data-i18n="dream_title" style="color: var(--text-light); font-size: 1.5rem; margin-bottom: 5px;">Sonho de paz</h3>
+                <p data-i18n="dream_text" style="font-size: 0.95rem; color: var(--text-muted);">No topo do Monte Everest, uma bandeira branca carregando o coração da paz será erguida como símbolo de uma humanidade que escolheu viver em paz.</p>
+            </div>
+        </div>
+        
+        <div class="dark-glass-card voxo-anim delay-1" style="text-align: center; padding: 40px;">
+            <h2 data-i18n="vol_title" style="font-size: 1.8rem; margin-bottom: 10px;">Voluntários pela paz</h2>
+            <p data-i18n="vol_sub" style="margin-bottom: 30px; font-size: 1rem; color: var(--text-muted);">Viaje pelo mundo pela paz</p>
+            <button class="btn dark-btn" style="cursor: default;" data-i18n="vol_btn">Em breve</button>
         </div>
     </div>
 
     <section class="section-spacing text-center voxo-anim">
-        <div class="heart-icon-small" style="margin-bottom: 10px;"></div>
-        <h3 data-i18n="share_title" style="font-size: 1.5rem; margin-bottom: 10px;">Envie pra um amigo</h3>
-        <p data-i18n="share_sub" style="color: #666;">Copie o link e compartilhe — cada voz conta.</p>
+        <div class="heart-icon-small" style="margin-bottom: 10px; filter: drop-shadow(0 0 10px var(--accent-light-purple));"></div>
+        <h3 data-i18n="share_title" style="font-size: 2rem; margin-bottom: 10px;">Envie pra um amigo</h3>
+        <p data-i18n="share_sub" style="color: var(--text-muted);">Copie o link e compartilhe — cada voz conta.</p>
         
         <div class="share-input-group">
             <input type="text" id="shareLink" value="https://6billionforpeace.net" readonly>
-            <button class="btn dark-btn" onclick="copyShareLink()" style="padding: 12px 25px;" data-i18n="share_btn">Copiar link</button>
+            <button class="btn dark-btn" onclick="copyShareLink()" style="padding: 12px 25px; border-radius: 50px;" data-i18n="share_btn">Copiar link</button>
         </div>
     </section>
 
     <footer class="footer">
         <div class="footer-container">
-            <div style="margin-bottom: 40px;">
-                <p data-i18n="foot_desc" style="color: white; font-size: 1.1rem; margin-bottom: 20px;">Este é um projeto livre e independente, sem distinções ou vínculos políticos, religiosos, comerciais ou nacionais. Seu único propósito é a paz.</p>
+            <div style="margin-bottom: 50px;">
+                <p data-i18n="foot_desc" style="color: var(--text-muted); font-size: 1.1rem; max-width: 600px;">Este é um projeto livre e independente, sem distinções ou vínculos políticos, religiosos, comerciais ou nacionais. Seu único propósito é a paz.</p>
             </div>
             
             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px;">
                 <div>
-                    <h4 data-i18n="foot_links_title" style="color: white; margin-bottom: 15px;">Links rápidos</h4>
+                    <h4 data-i18n="foot_links_title" style="color: var(--text-light); margin-bottom: 20px;">Links rápidos</h4>
                     <div class="footer-links">
                         <a href="#" data-i18n="fl_1">Início</a>
                         <a href="#" data-i18n="fl_2">Participação</a>
@@ -299,13 +389,13 @@
             </div>
 
             <div class="footer-credits">
-                <p data-i18n="foot_insp" style="margin-bottom: 15px;">Inspirado pela bondade humana, coragem, fé e compaixão. A paz é algo que construímos juntos.</p>
-                <p style="font-style: italic; color: rgba(255,255,255,0.5); margin-bottom: 20px;">Thanks Alice — Sofia — Frida — Suri — Meggan — Lua — Nadir — Marco — Juliana — Paris — Nádia — Vera — Mary — Julio. Part. Rafael A. — Samuel — *Yeshua — Haroldo — Lee — Jiang — Keanu — Jim — Charlie — Ana — Greta — Eddie — Neil and many others</p>
+                <p data-i18n="foot_insp" style="margin-bottom: 15px; color: var(--text-light);">Inspirado pela bondade humana, coragem, fé e compaixão. A paz é algo que construímos juntos.</p>
+                <p style="font-style: italic; color: rgba(255,255,255,0.3); margin-bottom: 30px; font-size: 0.8rem; max-width: 800px; margin-left: auto; margin-right: auto;">Thanks Alice — Sofia — Frida — Suri — Meggan — Lua — Nadir — Marco — Juliana — Paris — Nádia — Vera — Mary — Julio. Part. Rafael A. — Samuel — *Yeshua — Haroldo — Lee — Jiang — Keanu — Jim — Charlie — Ana — Greta — Eddie — Neil and many others</p>
                 
                 <p data-i18n="foot_copy">&copy; 2026 6billionforpeace · Todos os direitos reservados</p>
                 
-                <div class="voxo-credit" style="margin-top: 20px; font-size: 0.8rem;">
-                    Desenvolvido por <a href="https://voxostudio.com" target="_blank">VOXO ESTÚDIO</a>
+                <div class="voxo-credit" style="margin-top: 30px; font-size: 0.85rem;">
+                    Desenvolvido por <a href="https://voxostudio.com" target="_blank" rel="noopener noreferrer">VOXO ESTÚDIO</a>
                 </div>
             </div>
         </div>
@@ -313,79 +403,40 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // 1. DICIONÁRIO DE IDIOMAS (Português Completo Mapeado)
+            // 1. DICIONÁRIO DE IDIOMAS
             const translations = {
                 "pt": {
-                    "hero_title": "Ainda temos uma escolha",
-                    "hero_subtitle": "A solução é a paz",
+                    "hero_title": "Ainda temos uma escolha", "hero_subtitle": "A solução é a paz",
                     "intro_1": "Ao longo da história, a humanidade viveu conflitos acreditando que a guerra poderia trazer a paz.",
                     "intro_2": "Estamos cansados do sofrimento e da destruição causados pela violência.",
                     "intro_3": "Não queremos mais depender apenas de políticos, religiões, empresas ou instituições.",
                     "intro_4": "É hora de unir bilhões de pessoas em torno de um único objetivo: a paz no mundo.",
-                    "btn_sign": "Assinar pela paz",
-                    "glass_1": "Junte-se ao maior movimento pela paz da história da humanidade.",
+                    "btn_sign": "Assinar pela paz", "glass_1": "Junte-se ao maior movimento pela paz da história da humanidade.",
                     "glass_2": "A paz não será mais um sonho, um discurso, uma promessa ou uma esperança distante.",
-                    "glass_3": "A paz é a sobrevivência da humanidade.",
-                    "princ_title": "Nossos princípios",
+                    "glass_3": "A paz é a sobrevivência da humanidade.", "princ_title": "Nossos princípios",
                     "princ_sub": "Construído sobre dignidade, solidariedade humana, respeito e transparência.",
-                    "card1_title": "Sem ideologias",
-                    "card1_text": "Sem interferência nas leis internas ou na soberania de qualquer nação.",
-                    "card2_title": "Toda vida importa",
-                    "card2_text": "Independentemente de nacionalidade, sexo, etnia ou religião. Acima de tudo, devemos proteger a vida das crianças.",
-                    "card3_title": "Sem guerra",
-                    "card3_text": "A humanidade amadureceu o suficiente para resolver conflitos sem se autodestruir. Conhecemos o horror da guerra. Agora é hora de experimentar a alegria da paz.",
-                    "req_1": "Existe apenas uma exigência:",
-                    "req_2": "o fim da guerra.",
-                    "trans_label": "Transparência",
-                    "trans_title": "Como mantemos este movimento limpo",
-                    "tcard1_title": "Sem filiação",
-                    "tcard1_text": "Sem vínculos políticos, religiosos ou comerciais. Apenas uma mensagem em comum: paz no mundo.",
-                    "tcard2_title": "Sem rastreadores",
-                    "tcard2_text": "Sem scripts de publicidade ou analytics. Não fazemos perfil de você. Não vendemos dados.",
-                    "tcard3_title": "IP nunca armazenado",
-                    "tcard3_text": "Guardamos apenas um hash SHA-256 unidirecional com salt secreto, para evitar abuso. Não é reversível.",
-                    "tcard4_title": "Infraestrutura independente",
-                    "tcard4_text": "Banco de dados em servidor próprio. Mapa pelo MapLibre. Anti-bot pelo Cloudflare Turnstile. Política completa logo abaixo.",
-                    "link_priv": "Ler a política de privacidade",
-                    "link_term": "Ler os termos",
-                    "vol_title": "Voluntários pela paz",
-                    "vol_sub": "Viaje pelo mundo pela paz",
-                    "vol_btn": "Em breve",
-                    "map_sig": "assinaturas",
-                    "map_cou": "países",
-                    "map_voices": "Vozes ao redor do mundo",
-                    "form_title": "Assine pela paz",
-                    "form_sub": "Acrescente sua voz. Grátis, anônimo ao público, seguro.",
-                    "form_name": "Nome",
-                    "form_email": "E-mail",
-                    "form_country": "Selecione seu país",
-                    "form_check1": "Eu apoio um Tratado Mundial de Paz.",
-                    "form_check2": "Concordo com a coleta dos meus dados nos termos da política de privacidade (LGPD/GDPR).",
-                    "dream_title": "Sonho de paz",
-                    "dream_text": "No topo do Monte Everest, uma bandeira branca carregando o coração da paz será erguida como símbolo de uma humanidade que escolheu viver em paz.",
-                    "share_title": "Envie pra um amigo",
-                    "share_sub": "Copie o link e compartilhe — cada voz conta.",
-                    "share_btn": "Copiar link",
+                    "card1_title": "Sem ideologias", "card1_text": "Sem interferência nas leis internas ou na soberania de qualquer nação.",
+                    "card2_title": "Toda vida importa", "card2_text": "Independentemente de nacionalidade, sexo, etnia ou religião. Acima de tudo, devemos proteger a vida das crianças.",
+                    "card3_title": "Sem guerra", "card3_text": "A humanidade amadureceu o suficiente para resolver conflitos sem se autodestruir. Conhecemos o horror da guerra. Agora é hora de experimentar a alegria da paz.",
+                    "req_1": "Existe apenas uma exigência:", "req_2": "o fim da guerra.",
+                    "trans_label": "Transparência", "trans_title": "Como mantemos este movimento limpo",
+                    "tcard1_title": "Sem filiação", "tcard1_text": "Sem vínculos políticos, religiosos ou comerciais. Apenas uma mensagem em comum: paz no mundo.",
+                    "tcard2_title": "Sem rastreadores", "tcard2_text": "Sem scripts de publicidade ou analytics. Não fazemos perfil de você. Não vendemos dados.",
+                    "tcard3_title": "IP nunca armazenado", "tcard3_text": "Guardamos apenas um hash SHA-256 unidirecional com salt secreto, para evitar abuso. Não é reversível.",
+                    "tcard4_title": "Infraestrutura independente", "tcard4_text": "Banco de dados em servidor próprio. Mapa pelo MapLibre. Anti-bot pelo Cloudflare Turnstile. Política completa logo abaixo.",
+                    "link_priv": "Ler a política de privacidade", "link_term": "Ler os termos",
+                    "vol_title": "Voluntários pela paz", "vol_sub": "Viaje pelo mundo pela paz", "vol_btn": "Em breve",
+                    "map_sig": "assinaturas", "map_cou": "países", "map_voices": "Vozes ao redor do mundo",
+                    "form_title": "Assine pela paz", "form_sub": "Acrescente sua voz. Grátis, anônimo ao público, seguro.",
+                    "form_name": "Nome", "form_email": "E-mail", "form_country": "Selecione seu país",
+                    "form_check1": "Eu apoio um Tratado Mundial de Paz.", "form_check2": "Concordo com a coleta dos meus dados nos termos da política de privacidade (LGPD/GDPR).",
+                    "dream_title": "Sonho de paz", "dream_text": "No topo do Monte Everest, uma bandeira branca carregando o coração da paz será erguida como símbolo de uma humanidade que escolheu viver em paz.",
+                    "share_title": "Envie pra um amigo", "share_sub": "Copie o link e compartilhe — cada voz conta.", "share_btn": "Copiar link",
                     "foot_desc": "Este é um projeto livre e independente, sem distinções ou vínculos políticos, religiosos, comerciais ou nacionais. Seu único propósito é a paz.",
-                    "foot_links_title": "Links rápidos",
-                    "fl_1": "Início",
-                    "fl_2": "Participação",
-                    "fl_3": "Transparência",
-                    "fl_4": "Doações",
-                    "fl_5": "Mural Global da Paz",
-                    "fl_6": "Declaração Civil Global pela Paz",
+                    "foot_links_title": "Links rápidos", "fl_1": "Início", "fl_2": "Participação", "fl_3": "Transparência", "fl_4": "Doações", "fl_5": "Mural Global da Paz", "fl_6": "Declaração Civil Global pela Paz",
                     "foot_insp": "Inspirado pela bondade humana, coragem, fé e compaixão. A paz é algo que construímos juntos.",
                     "foot_copy": "© 2026 6billionforpeace · Todos os direitos reservados"
                 }
-                // Instrução para adicionar as traduções dos outros idiomas:
-                // Basta criar o bloco abaixo para "en", "es", "fr", etc., copiando as mesmas chaves acima e alterando o texto.
-                /*
-                "en": {
-                    "hero_title": "We still have a choice",
-                    "hero_subtitle": "The solution is peace",
-                    ...
-                }
-                */
             };
 
             // 2. Lógica Menu de Idiomas
@@ -404,7 +455,6 @@
             langItems.forEach(item => {
                 item.addEventListener('click', function() {
                     const selectedLang = this.getAttribute('data-lang');
-                    
                     currentLangText.innerText = this.innerText;
                     langList.classList.remove('active');
                     langItems.forEach(li => li.classList.remove('active'));
@@ -427,9 +477,23 @@
                 });
             });
 
-            // 3. Mapa Leaflet Simulado
+            // 3. Mapa Leaflet (TEMA ESCURO)
             var map = L.map('peaceMap', { zoomControl: false, scrollWheelZoom: false }).setView([20, 0], 1.5);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png').addTo(map);
+            
+            // TileLayer Dark Mode do CartoDB para combinar com o design
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap &copy; CartoDB',
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(map);
+
+            var neonHeart = L.divIcon({
+                className: 'custom-div-icon',
+                html: "<div style='background-color:#00A3FF; width:10px; height:10px; border-radius:50%; box-shadow: 0 0 15px #00A3FF, 0 0 30px #6C13E2;'></div>",
+                iconSize: [10, 10], iconAnchor: [5, 5]
+            });
+
+            L.marker([-14.235, -51.925], {icon: neonHeart}).addTo(map); // Brazil Demo
 
             // 4. Animação Scroll
             const observer = new IntersectionObserver((entries) => {
@@ -445,9 +509,19 @@
             // 5. Submit Form Simulado
             document.getElementById('peaceForm').addEventListener('submit', function(e) {
                 e.preventDefault();
-                var btn = this.querySelector('.submit-btn');
-                btn.style.backgroundColor = "#00FF66";
-                btn.style.color = "#001533";
+                var btn = this.querySelector('.glow-btn');
+                var originalText = btn.innerText;
+                btn.innerText = "Sua voz foi registrada!";
+                btn.style.background = "#00FF66";
+                btn.style.color = "#010105";
+                btn.style.boxShadow = "0 0 30px rgba(0,255,102,0.5)";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = "";
+                    btn.style.color = "";
+                    btn.style.boxShadow = "";
+                    this.reset();
+                }, 4000);
             });
         });
 
@@ -456,6 +530,10 @@
             var copyText = document.getElementById("shareLink");
             copyText.select();
             document.execCommand("copy");
+            var btn = event.target;
+            var originalText = btn.innerText;
+            btn.innerText = "Copiado!";
+            setTimeout(() => btn.innerText = originalText, 2000);
         }
     </script>
 </div>
